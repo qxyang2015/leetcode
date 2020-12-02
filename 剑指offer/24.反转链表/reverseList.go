@@ -9,15 +9,9 @@ func ReverseList(head *ListNode) *ListNode {
 	if head == nil || head.Next == nil {
 		return head
 	}
-	preNode := head
-	node := head.Next
-	for node != nil {
-		nexNode := node.Next
-
-		node.Next = preNode
-
-		preNode, node = node, nexNode
+	preNode, curNode := (*ListNode)(nil), head
+	for curNode != nil {
+		curNode.Next, preNode, curNode = preNode, curNode, curNode.Next
 	}
-	head.Next = nil
 	return preNode
 }
